@@ -4,6 +4,10 @@
   <title>User Profiles</title>
 </head>
 <body ng-controller="MainController">
+
+    <button ng-click="previous()">Prev</button>
+    <button ng-click="next()">Next</button>
+
   <div ng-repeat="user in users">
     <h1>{{user.first_name}} {{user.last_name}}</h1>
     <img src="{{user.avatar}}">
