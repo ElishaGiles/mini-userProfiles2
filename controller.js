@@ -1,29 +1,16 @@
 angular.module('userProfiles').controller('MainController', function($scope, mainService) {
 
-$scope.pageNum = 1;
-
   $scope.getUsers = function() {
-    var promise = mainService.getUsers($scope.pageNum);
+    var promise = mainService.getUsers();
 
     promise.then(function(response) {
+      if(response.status === 200) {
       $scope.users = response.data.data;
-      $scope.totalPages = response.data.total_pages;
+      $scope.noData = null;
+    } else {
+      $scope.noData = "There was an error!"
+    }
     });
   }
   $scope.getUsers();
-
-  $scope.previous = function() {
-    if($scope.pageNum > 1) {
-      $scope.pageNum--;
-      $scope.getUsers();
-    }
-  }
-
-  $scope.next = function() {
-    if($scope.totalPages > $scope.pageNum) {
-      $scope.pageNum++;
-      $scope.getUsers();
-    }
-  }
-
 });
